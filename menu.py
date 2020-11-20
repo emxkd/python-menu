@@ -1,5 +1,9 @@
 import os
 import getpass
+import fileinput
+import subprocess
+
+os.system("clear")
 os.system("tput setaf 14")
 print ("\t\t\t Welcome to Menu!!!")
 os.system("tput setaf 12")
@@ -10,7 +14,121 @@ if passwd != "divya":
 	print("password incorrect")
 	exit()
 
-print ("Entering local device")
+	
+def lvm():
+  while True:
+    os.system("clear")
+    os.system("tput setaf 14")
+    os.system("\t\t\tfiglet -t -k LVM Menu")
+    print("""
+ Press:-
+ 1.To find available disk space
+ 2.Format hard disk.
+ 4.Create Physical Volume.
+ 5.Check Physical Volume.
+ 6.Create Volume Group.
+ 7.Check Volume Group.
+ 8.Create Logical Volume.
+ 9.Check Logical Volume.
+ 11.To mount partition.
+ 12.To extend partition.
+ 13.For see how much hard disk you have.
+ 14.To Exit.""")    
+    ch=int(input("Enter Your Choice:-"))    
+    os.system("tput setaf 7")        
+    if ch == 1:         
+        os.system("df -hT")
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+    elif ch == 2:       
+        format1=input("Enter your partition name :")
+        os.system("mkfs.ext4 "+format1) 
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+    
+
+    elif ch == 4:       
+        name1=input("name your physical volume :")
+        os.system("pvcreate "+name1)
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+    elif ch == 5:       
+        name2=input("name your physical volume :")
+        os.system("pvdisplay "+name2)
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+    elif ch == 6:
+        j=int(input("how many pv you have : "))
+        x=" "
+        for i in range(j):
+            pvs=input("Enter your P.V. name : ")
+            x=x+" "+pvs
+        print(x)
+        nameofvg=input("Enter Your vg name")
+        os.system("vgcreate "+nameofvg+" "+x)
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+    
+    elif ch == 7:
+        name3=input("Enter your vg name : ")
+        os.system("vgdisplay "+name3)   
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+    elif ch == 8:
+        lvname=input("Enter your lv name : ")
+        size=input("Enter your size : ")
+        vgname=input("Enter your vg name : ")
+        os.system("lvcreate --size "+size+" --name "+lvname+" "+vgname)
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+    elif ch == 9:
+        lvname=input("Enter your vg name : ")
+        os.system("lvdisplay "+lvname)
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+
+    elif ch == 11:
+        vgname=input("Enter your Volume group name : ")
+        lvname=input("Enter your Partition name : ")
+        dname=input("Enter your Directory name : ")
+        os.system("mount /dev/"+vgname+"/"+lvname+" /"+dname)
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+    elif ch == 12:
+        vgname=input("Enter your Volume group name : ")
+        lvname=input("Enter your Partition name : ")
+        size=input("Enter your Extend Size : ")
+        os.system("lvextend --size +"+size+" /dev/"+vgname+"/"+lvname)
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+    elif ch == 13:
+        os.system("fdisk -l")
+        inter = input("do you want to continue on LVM  menu  [y/N]:\t")
+        if inter != 'y' and inter!= 'Y':
+            break
+
+    elif ch == 14:
+        break
+
+
 while True:
   os.system("tput setaf 2")
   print("""
