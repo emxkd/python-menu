@@ -137,9 +137,7 @@ while True:
   elif int(ch) == 26:
     name = input ("enter file along with path:")
     os.system("hdfs dfs -get {} /hadoop".format(name))
-  elif int(ch) == 26:
-    name = input ("enter file along with path:")
-    os.system("hdfs dfs -get {} /hadoop".format(name))
+  
   elif int(ch) == 27:
     name = input ("enter key-pair name:")
     os.system("aws ec2 create-key-pair --key-name {}".format(name))
